@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 type SidebarProps = {
   collapsed: boolean;
@@ -20,6 +23,9 @@ export default function Sidebar({
   collapsed,
   setCollapsed,
 }: SidebarProps) {
+
+  const pathname = usePathname();
+
   return (
     <aside
       className={`
@@ -29,27 +35,34 @@ export default function Sidebar({
         border-zinc-800
         p-4
         transition-all
-        duration-300
+        duration-500
+        ease-in-out
       `}
     >
       <button
         onClick={() => setCollapsed(!collapsed)}
-        className="mb-6 w-full rounded-lg bg-zinc-800 p-2 hover:bg-zinc-700 transition"
+        className="mb-6 w-full rounded-lg bg-zinc-900 p-2 hover:bg-cyan-600 transition"
       >
-        {collapsed ? "▶" : "◀"}
+        {collapsed ? "❯" : "❮"}
       </button>
 
       {itens.map((item) => (
         <Link
           key={item.rota}
           href={item.rota}
-          className="flex items-center gap-3 rounded-lg p-3 hover:bg-zinc-800 hover:text-cyan-400 transition"
+          className={`
+            flex items-center gap-3 rounded-lg p-3 transition-all duration-200
+
+            ${
+              pathname === item.rota
+                ? "bg-cyan-500/10 text-cyan-400 border border-cyan-500/30"
+                : "hover:bg-zinc-800 hover:text-cyan-400"
+            }
+          `}
         >
           <span className="text-xl">{item.emoji}</span>
 
-          {!collapsed && (
-            <span>{item.nome}</span>
-          )}
+          {!collapsed && <span>{item.nome}</span>}
         </Link>
       ))}
     </aside>

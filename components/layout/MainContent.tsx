@@ -8,6 +8,8 @@ type Noticia = {
   descricao: string;
   link: string;
   data: string;
+  imagem: string;
+  fonte: string;
 };
 
 type Props = {
@@ -44,11 +46,12 @@ export default function MainContent({
         {noticias.map((noticia) => (
           <NewsCard
             key={noticia.link}
-            categoria={titulo}
             titulo={noticia.titulo}
-            descricao={noticia.descricao || ""}
-            fonte="OASIS"
-            tempo={noticia.data || ""}
+            descricao={noticia.descricao}
+            link={noticia.link}
+            data={noticia.data}
+            imagem={noticia.imagem}
+            fonte={noticia.fonte}
           />
         ))}
       </div>

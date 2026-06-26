@@ -1,18 +1,22 @@
-import Parser from "rss-parser";
-
-const parser = new Parser();
+import { buscarFeedBiologia } from "@/lib/feeds";
 
 export async function GET() {
-  const feed = await parser.parseURL(
-    "https://phys.org/rss-feed/biology-news/"
-  );
 
-  const noticias = feed.items.slice(0, 10).map((item) => ({
-    titulo: item.title,
-    descricao: item.contentSnippet,
-    link: item.link,
-    data: item.pubDate,
-  }));
+  try {
 
-  return Response.json(noticias);
+    const noticias = await buscarFeedBiologia();
+
+    return Response.json(noticias);
+
+  } catch (erro) {
+
+    console.error(erro);
+
+    return Response.json(
+      { erro: "Erro ao carregar notícias." },
+      { status: 500 }
+    );
+
+  }
+
 }

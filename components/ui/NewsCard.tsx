@@ -1,39 +1,68 @@
-type NewsCardProps = {
-  categoria: string;
+import Image from "next/image";
+
+type Props = {
   titulo: string;
   descricao: string;
+  link: string;
+  data: string;
   fonte: string;
-  tempo: string;
+  imagem: string;
 };
 
 export default function NewsCard({
-  categoria,
   titulo,
   descricao,
+  link,
+  data,
   fonte,
-  tempo,
-}: NewsCardProps) {
+  imagem,
+}: Props) {
   return (
-    <a
-      className="block bg-zinc-900 border border-zinc-800 rounded-xl p-6 hover:border-cyan-500 transition"
-    >
+    <div className="overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-500 hover:shadow-lg hover:shadow-cyan-500/20">
 
-      <span className="text-cyan-400 text-sm font-semibold">
-        {categoria}
-      </span>
+      {imagem && (
+        <Image
+          src={imagem}
+          alt={titulo}
+          width={800}
+          height={450}
+          className="h-52 w-full object-cover"
+        />
+      )}
 
-      <h2 className="text-2xl font-bold mt-2">
-        {titulo}
-      </h2>
+      <div className="p-5">
 
-      <p className="text-zinc-400 mt-3 line-clamp-4">
-        {descricao}
-      </p>
+        <p className="mb-2 text-sm font-semibold text-cyan-400">
+          {fonte}
+        </p>
 
-      <p className="text-xs text-zinc-600 mt-6">
-        {fonte} • {tempo}
-      </p>
+        <h2 className="mb-3 text-xl font-bold">
+          {titulo}
+        </h2>
 
-    </a>
+        <p className="mb-5 line-clamp-3 text-zinc-400">
+          {descricao}
+        </p>
+
+        <div className="flex items-center justify-between">
+
+          <span className="text-sm text-zinc-500">
+            {new Date(data).toLocaleDateString("pt-BR")}
+          </span>
+
+          <a
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold text-cyan-400 transition hover:text-cyan-300"
+          >
+            Ler matéria →
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
   );
 }
