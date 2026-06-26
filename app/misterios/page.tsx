@@ -19,11 +19,7 @@ export default function MisteriosPage() {
 
           <Link
             key={caso.titulo}
-            href={`/misterios/${caso.titulo
-              .toLowerCase()
-              .replaceAll(" ", "-")
-              .replaceAll("ç", "c")
-            }`}
+            href={`/misterios/${caso.slug}`}
             className="rounded-xl border border-zinc-800 bg-zinc-900 p-6 transition hover:border-cyan-500 hover:-translate-y-1"
           >
 
@@ -32,7 +28,7 @@ export default function MisteriosPage() {
             </h2>
 
             <p className="mt-2 text-cyan-400">
-              {caso.pais} • {caso.ano}
+              📍 {caso.local} • 📅 {caso.dataInicio}
             </p>
 
             <p className="mt-4 text-zinc-300">
