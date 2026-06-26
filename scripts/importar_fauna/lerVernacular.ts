@@ -1,6 +1,6 @@
 import AdmZip from "adm-zip";
 
-export function lerVernacular(zip: AdmZip) {
+export function lerVernacular(zip: any) {
 
     const arquivo = zip.getEntry("vernacularname.txt");
 

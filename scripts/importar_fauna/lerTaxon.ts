@@ -1,6 +1,6 @@
 import AdmZip from "adm-zip";
 
-export function lerTaxon(zip: AdmZip) {
+export function lerTaxon(zip: any) {
 
     const arquivo = zip.getEntry("taxon.txt");
 
