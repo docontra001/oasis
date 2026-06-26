@@ -53,7 +53,7 @@ export default async function Caso({
 
         <div className="space-y-5">
 
-          {caso.cronologia.map((evento) => (
+          {caso.cronologia.map((evento: any) => (
 
             <div
               key={evento.titulo}
@@ -87,7 +87,7 @@ export default async function Caso({
 
         <ul className="list-disc pl-6 space-y-2">
 
-          {caso.pessoas.map((pessoa) => (
+          {caso.pessoas.map((pessoa: any) => (
             <li key={pessoa}>{pessoa}</li>
           ))}
 
@@ -103,7 +103,7 @@ export default async function Caso({
 
         <ul className="list-disc pl-6 space-y-2">
 
-          {caso.instituicoes.map((instituicao) => (
+          {caso.instituicoes.map((instituicao: any) => (
             <li key={instituicao}>{instituicao}</li>
           ))}
 
@@ -119,7 +119,7 @@ export default async function Caso({
 
         <div className="space-y-4">
 
-          {caso.hipoteses.map((hipotese) => (
+          {caso.hipoteses.map((hipotese: any) => (
 
             <div
               key={hipotese.titulo}
@@ -150,7 +150,7 @@ export default async function Caso({
 
         <ul className="list-disc pl-6 space-y-2">
 
-          {caso.questoesEmAberto.map((questao) => (
+          {caso.questoesEmAberto.map((questao: any) => (
             <li key={questao}>{questao}</li>
           ))}
 
@@ -170,7 +170,7 @@ export default async function Caso({
 
         <ul className="list-disc pl-6 mb-6">
 
-          {caso.fontes.primarias.map((fonte) => (
+          {caso.fontes.primarias.map((fonte: any) => (
             <li key={fonte}>{fonte}</li>
           ))}
 
@@ -182,7 +182,7 @@ export default async function Caso({
 
         <ul className="list-disc pl-6">
 
-          {caso.fontes.secundarias.map((fonte) => (
+          {caso.fontes.secundarias.map((fonte: any) => (
             <li key={fonte}>{fonte}</li>
           ))}
 

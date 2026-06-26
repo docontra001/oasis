@@ -20,7 +20,7 @@ export default function ArquivoPage() {
             </h2>
 
             <p className="text-cyan-400 mt-2">
-              {caso.pais} • {caso.ano}
+              {caso.local} • {caso.dataInicio}
             </p>
 
             <p className="mt-4 text-zinc-300">

@@ -1,4 +1,4 @@
-import type { Caso } from "@/types/caso";
+import type { Caso } from "../../types/caso";
 const operacaoPrato: Caso = {
   slug: "operacao-prato",
 
