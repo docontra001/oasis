@@ -8,7 +8,7 @@ export default function Header() {
       <Image
         src="/logo3.png"
         alt="OASIS"
-        width={220}
+        width={250}
         height={70}
         priority
       />
