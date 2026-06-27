@@ -8,18 +8,16 @@ datasource db {
 }
 
 model Animal {
-  id             String @id
+  id             String  @id
   slug           String
   nome           String?
   nomeCientifico String
-
   reino          String?
   filo           String?
   classe         String?
   ordem          String?
   familia        String?
   genero         String?
-
   destaque       Boolean @default(false)
   imagem         String?
 }

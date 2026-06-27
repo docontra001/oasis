@@ -12,31 +12,21 @@ export async function GET(request: NextRequest) {
             {
               nome: {
                 contains: busca,
+                mode: "insensitive",
               },
             },
             {
               nomeCientifico: {
                 contains: busca,
+                mode: "insensitive",
               },
             },
           ],
         }
       : {
-          AND: [
-            {
-              destaque: true,
-            },
-            {
-              imagem: {
-                not: null,
-              },
-            },
-            {
-              nome: {
-                not: "",
-              },
-            },
-          ],
+          nome: {
+            not: "",
+          },
         },
 
     select: {
