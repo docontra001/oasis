@@ -1,21 +1,19 @@
-import fs from "fs";
-import path from "path";
 import { NextResponse } from "next/server";
+import { buscarImagemWikipedia } from "@/lib/fauna/wikipedia";
 
-export async function GET() {
-  const arquivo = path.join(
-    process.cwd(),
-    "saida",
-    "animais.json"
-  );
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
 
-  const animais = JSON.parse(
-    fs.readFileSync(arquivo, "utf8")
-  );
+  const nome = searchParams.get("nome");
 
-  return NextResponse.json(
-    animais
-      .filter((a: any) => a.nome)
-      .slice(0, 30)
-  );
+  if (!nome) {
+    return NextResponse.json(
+      { erro: "Nome não informado." },
+      { status: 400 }
+    );
+  }
+
+  const resultado = await buscarImagemWikipedia(nome);
+
+  return NextResponse.json(resultado);
 }
