@@ -24,8 +24,9 @@ export async function GET(request: NextRequest) {
           ],
         }
       : {
-          nome: {
-            not: "",
+          destaque: true,
+          imagem: {
+            not: null,
           },
         },
 
@@ -41,11 +42,11 @@ export async function GET(request: NextRequest) {
       imagem: true,
     },
 
-    take: 30,
-
     orderBy: {
       nome: "asc",
     },
+
+    take: 30,
   });
 
   return NextResponse.json(animais);

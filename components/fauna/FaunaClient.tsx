@@ -10,9 +10,7 @@ export default function FaunaClient() {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      fetch(
-        `/api/fauna?search=${encodeURIComponent(pesquisa)}`
-      )
+      fetch(`/api/fauna?search=${encodeURIComponent(pesquisa)}`)
         .then((r) => r.json())
         .then(setAnimais)
         .catch(console.error);
@@ -22,28 +20,26 @@ export default function FaunaClient() {
   }, [pesquisa]);
 
   return (
-  <>
-    <SearchBar
-      value={pesquisa}
-      onChange={setPesquisa}
-    />
+    <>
+      <SearchBar
+        value={pesquisa}
+        onChange={setPesquisa}
+      />
 
-    <h1 className="text-white text-2xl">
-      {animais.length} animais
-    </h1>
+      <h2 className="text-3xl font-bold mt-8 mb-6">
+        {pesquisa
+          ? `${animais.length} resultados`
+          : "Espécies em destaque"}
+      </h2>
 
-    <pre className="text-white text-xs overflow-auto">
-      {JSON.stringify(animais[0], null, 2)}
-    </pre>
-
-    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 mt-8">
-      {animais.map((animal) => (
-        <AnimalCard
-          key={animal.id}
-          animal={animal}
-        />
-      ))}
-    </div>
-  </>
-);
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+        {animais.map((animal) => (
+          <AnimalCard
+            key={animal.id}
+            animal={animal}
+          />
+        ))}
+      </div>
+    </>
+  );
 }
