@@ -1,0 +1,26 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./oasis.db"
+}
+
+model Animal {
+  id             String @id
+  slug           String @unique
+
+  nome           String?
+  nomeCientifico String
+
+  reino          String?
+  filo           String?
+  classe         String?
+  ordem          String?
+  familia        String?
+  genero         String?
+
+  destaque       Boolean @default(false)
+  imagem         String?
+}

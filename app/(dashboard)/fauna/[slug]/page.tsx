@@ -1,8 +1,6 @@
-import fs from "fs";
-import path from "path";
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { buscarImagemWikipedia } from "@/lib/fauna/wikipedia";
+import { prisma } from "@/lib/prisma";
 
 export default async function PaginaAnimal({
   params,
@@ -11,27 +9,15 @@ export default async function PaginaAnimal({
 }) {
   const { slug } = await params;
 
-  const arquivo = path.join(
-    process.cwd(),
-    "saida",
-    "animais.json"
-  );
-
-  const animais = JSON.parse(
-    fs.readFileSync(arquivo, "utf8")
-  );
-
-  const animal = animais.find(
-    (a: any) => a.slug === slug
-  );
+  const animal = await prisma.animal.findFirst({
+  where: {
+    slug,
+  },
+});
 
   if (!animal) {
     notFound();
   }
-
-  const imagem = await buscarImagemWikipedia(
-    animal.nomeCientifico
-  );
 
   return (
     <main className="min-h-screen bg-zinc-950 text-white p-4 sm:p-6 lg:p-10">
@@ -43,11 +29,11 @@ export default async function PaginaAnimal({
         ← Voltar para a fauna
       </a>
 
-      {imagem?.imagem && (
+      {animal.imagem && (
         <div className="w-full rounded-2xl overflow-hidden bg-zinc-900 mt-8 mb-8 border border-zinc-800">
 
           <Image
-            src={imagem.imagem}
+            src={animal.imagem}
             alt={animal.nomeCientifico}
             width={1600}
             height={900}
@@ -65,12 +51,6 @@ export default async function PaginaAnimal({
       <p className="text-lg sm:text-2xl italic text-cyan-400 mt-2">
         {animal.nomeCientifico}
       </p>
-
-      {imagem?.descricao && (
-        <p className="text-sm sm:text-base text-zinc-400 mt-2">
-          {imagem.descricao}
-        </p>
-      )}
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-10">
 

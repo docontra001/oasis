@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import Image from "next/image";
 
 type Animal = {
   id: string;
@@ -8,6 +11,7 @@ type Animal = {
   familia: string;
   ordem: string;
   classe: string;
+  imagem?: string | null;
 };
 
 type Props = {
@@ -30,9 +34,23 @@ export default function AnimalCard({ animal }: Props) {
         hover:scale-[1.02]
       "
     >
+      <div className="h-52 bg-zinc-800">
 
-      <div className="h-48 bg-zinc-800 flex items-center justify-center text-6xl">
-        🦜
+        {animal.imagem ? (
+          <Image
+            src={animal.imagem}
+            alt={animal.nomeCientifico}
+            width={600}
+            height={400}
+            unoptimized
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <div className="flex h-full items-center justify-center text-6xl">
+            🦜
+          </div>
+        )}
+
       </div>
 
       <div className="p-5">
@@ -46,13 +64,9 @@ export default function AnimalCard({ animal }: Props) {
         </p>
 
         <div className="mt-5 space-y-1 text-sm text-zinc-400">
-
           <p><b>Classe:</b> {animal.classe || "-"}</p>
-
           <p><b>Ordem:</b> {animal.ordem || "-"}</p>
-
           <p><b>Família:</b> {animal.familia || "-"}</p>
-
         </div>
 
       </div>

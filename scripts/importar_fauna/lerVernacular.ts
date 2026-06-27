@@ -12,6 +12,9 @@ export function lerVernacular(zip: any) {
 
     const linhas = texto.split("\n");
 
+    console.log(linhas[0]);
+console.log(linhas[1]);
+
     const mapa = new Map<string, string>();
 
     for (let i = 1; i < linhas.length; i++) {

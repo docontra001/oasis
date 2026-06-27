@@ -1,35 +1,62 @@
-import fs from "fs";
-import path from "path";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
 
-export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-
+export async function GET(request: NextRequest) {
   const busca =
-    searchParams.get("search")?.toLowerCase().trim() ?? "";
+    request.nextUrl.searchParams.get("search")?.trim() ?? "";
 
-  const arquivo = path.join(
-    process.cwd(),
-    "saida",
-    "animais.json"
-  );
+  const animais = await prisma.animal.findMany({
+    where: busca
+      ? {
+          OR: [
+            {
+              nome: {
+                contains: busca,
+              },
+            },
+            {
+              nomeCientifico: {
+                contains: busca,
+              },
+            },
+          ],
+        }
+      : {
+          AND: [
+            {
+              destaque: true,
+            },
+            {
+              imagem: {
+                not: null,
+              },
+            },
+            {
+              nome: {
+                not: "",
+              },
+            },
+          ],
+        },
 
-  const animais = JSON.parse(
-    fs.readFileSync(arquivo, "utf8")
-  );
+    select: {
+      id: true,
+      slug: true,
+      nome: true,
+      nomeCientifico: true,
+      classe: true,
+      ordem: true,
+      familia: true,
+      genero: true,
+      imagem: true,
+    },
 
-  let resultado = animais.filter((a: any) => a.nome);
+    take: 30,
 
-  if (busca) {
-    resultado = resultado.filter((animal: any) => {
-      return (
-        animal.nome?.toLowerCase().includes(busca) ||
-        animal.nomeCientifico?.toLowerCase().includes(busca)
-      );
-    });
-  }
+    orderBy: {
+      nome: "asc",
+    },
+  });
 
-  return NextResponse.json(
-    resultado.slice(0, 30)
-  );
+  return NextResponse.json(animais);
 }

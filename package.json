@@ -3,17 +3,22 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "importar-fauna": "tsx scripts/importar_fauna/index.ts",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "importar-fauna": "tsx scripts/importar_fauna/index.ts",
+    "importar": "tsx scripts/importarSQLite.ts",
+    "marcar-destaques": "tsx scripts/marcarDestaques.ts",
+    "listar-nomes": "tsx scripts/listarNomes.ts"
   },
   "dependencies": {
+    "@prisma/client": "^6.19.3",
     "adm-zip": "^0.5.17",
     "cheerio": "^1.2.0",
     "csv-parser": "^3.2.1",
     "next": "16.2.9",
+    "prisma": "^6.19.3",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "rss-parser": "^3.13.0"
@@ -27,6 +32,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.9",
     "tailwindcss": "^4",
+    "tsx": "^4.22.4",
     "typescript": "^5"
   }
 }
