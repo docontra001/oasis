@@ -2,7 +2,12 @@ import fs from "fs";
 import path from "path";
 import { NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+
+  const busca =
+    searchParams.get("search")?.toLowerCase().trim() ?? "";
+
   const arquivo = path.join(
     process.cwd(),
     "saida",
@@ -13,9 +18,18 @@ export async function GET() {
     fs.readFileSync(arquivo, "utf8")
   );
 
+  let resultado = animais.filter((a: any) => a.nome);
+
+  if (busca) {
+    resultado = resultado.filter((animal: any) => {
+      return (
+        animal.nome?.toLowerCase().includes(busca) ||
+        animal.nomeCientifico?.toLowerCase().includes(busca)
+      );
+    });
+  }
+
   return NextResponse.json(
-    animais
-      .filter((a: any) => a.nome)
-      .slice(0, 30)
+    resultado.slice(0, 30)
   );
 }
