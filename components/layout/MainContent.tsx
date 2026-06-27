@@ -1,5 +1,5 @@
 "use client";
-
+import BannerOasis from "../BannerOasis";
 import { useEffect, useState } from "react";
 import NewsCard from "../ui/NewsCard";
 
@@ -36,7 +36,10 @@ export default function MainContent({
 
   return (
     <main className="flex-1 bg-zinc-950 p-8 overflow-y-auto">
-      <h1 className="text-4xl font-bold">{titulo}</h1>
+
+  <BannerOasis />
+
+  <h1 className="text-4xl font-bold">{titulo}</h1>
 
       <p className="text-zinc-500 mt-2 mb-8">
         Últimas atualizações.
