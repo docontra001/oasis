@@ -1,0 +1,62 @@
+[
+  {
+    "nomeCientifico": "Tyrannosaurus rex",
+    "nome": "Tyrannosaurus rex",
+    "descricao": "Wikimedia disambiguation page",
+    "imagem": ""
+  },
+  {
+    "nomeCientifico": "Spinosaurus aegyptiacus",
+    "nome": "Spinosaurus aegyptiacus",
+    "descricao": "extinct species of theropod dinosaurs",
+    "imagem": "http://commons.wikimedia.org/wiki/Special:FilePath/Spinosaurus%20in%20Japan%20Expo.jpg"
+  },
+  {
+    "nomeCientifico": "Triceratops horridus",
+    "nome": "Triceratops horridus",
+    "descricao": "extinct species of ceratopsian dinosaurs (Ceratopsia)",
+    "imagem": "http://commons.wikimedia.org/wiki/Special:FilePath/Triceratops%20BW.jpg"
+  },
+  {
+    "nomeCientifico": "Velociraptor mongoliensis",
+    "nome": "Velociraptor mongoliensis",
+    "descricao": "extinct species of theropod dinosaur belonging to the Dromaeosaurs",
+    "imagem": "http://commons.wikimedia.org/wiki/Special:FilePath/Velociraptor%20Restoration.png"
+  },
+  {
+    "nomeCientifico": "Carnotaurus sastrei",
+    "nome": "Carnotaurus sastrei",
+    "descricao": "species of reptile (fossil)",
+    "imagem": "http://commons.wikimedia.org/wiki/Special:FilePath/Carnotaurus%2C%20Chlup%C3%A1%C4%8D%20Museum%2C%20Prague-2.jpg"
+  },
+  {
+    "nomeCientifico": "Allosaurus fragilis",
+    "nome": "Allosaurus fragilis",
+    "descricao": "extinct species of theropod dinosaurs (Theropoda)",
+    "imagem": "http://commons.wikimedia.org/wiki/Special:FilePath/Allosaurus%20SDNHM.jpg"
+  },
+  {
+    "nomeCientifico": "Stegosaurus stenops",
+    "nome": "Stegosaurus stenops",
+    "descricao": "extinct species of ornithischian dinosaurs (Ornithischia)",
+    "imagem": ""
+  },
+  {
+    "nomeCientifico": "Ankylosaurus magniventris",
+    "nome": "Ankylosaurus magniventris",
+    "descricao": "species of reptile (fossil)",
+    "imagem": "http://commons.wikimedia.org/wiki/Special:FilePath/Ankylosaurus%20magniventris%20reconstruction%20nomargin.png"
+  },
+  {
+    "nomeCientifico": "Diplodocus carnegii",
+    "nome": "Diplodocus carnegii",
+    "descricao": "species of diplodocid sauropod dinosaur (fossil)",
+    "imagem": "http://commons.wikimedia.org/wiki/Special:FilePath/Diplodocus%20carnegii.jpg"
+  },
+  {
+    "nomeCientifico": "Brachiosaurus altithorax",
+    "nome": "Brachiosaurus altithorax",
+    "descricao": "extinct species of Jurassic sauropods",
+    "imagem": "http://commons.wikimedia.org/wiki/Special:FilePath/FMNH%20Brachiosaurus.JPG"
+  }
+]

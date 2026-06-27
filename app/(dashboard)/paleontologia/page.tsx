@@ -1,11 +1,19 @@
-export default function Pagina() {
-  return (
-    <div className="min-h-screen bg-zinc-950 text-white flex items-center justify-center">
+import PaleoClient from "@/components/paleontologia/PaleoClient";
 
-      <h1 className="text-5xl font-bold">
-        Em construção 🚧
+export default function Paleontologia() {
+  return (
+    <main className="min-h-screen bg-zinc-950 text-white p-10">
+
+      <h1 className="text-5xl font-bold mb-3">
+        🦖 Paleontologia
       </h1>
 
-    </div>
+      <p className="text-zinc-400 mb-8">
+        Catálogo de organismos fósseis.
+      </p>
+
+      <PaleoClient />
+
+    </main>
   );
 }

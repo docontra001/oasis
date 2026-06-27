@@ -25,9 +25,7 @@ export async function GET(request: NextRequest) {
         }
       : {
           destaque: true,
-          imagem: {
-            not: null,
-          },
+          
         },
 
     select: {

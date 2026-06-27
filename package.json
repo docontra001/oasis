@@ -22,7 +22,9 @@
     "prisma": "^6.19.3",
     "react": "19.2.4",
     "react-dom": "19.2.4",
-    "rss-parser": "^3.13.0"
+    "rss-parser": "^3.13.0",
+    "sharp": "^0.35.2",
+    "wikibase-sdk": "^11.6.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
