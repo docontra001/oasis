@@ -7,8 +7,7 @@ async function main() {
 
   await prisma.animal.updateMany({
     data: {
-      destaque: false,
-      imagem: null,
+      destaque: false
     },
   });
 

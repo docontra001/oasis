@@ -5,8 +5,6 @@ export async function buscarImagemWikipedia(
     .replace(/\(.*?\)/g, "")
     .trim();
 
-  console.log("Buscando:", nomePesquisa);
-
   const url =
     `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(
       nomePesquisa
@@ -14,25 +12,28 @@ export async function buscarImagemWikipedia(
 
   const resposta = await fetch(url, {
     headers: {
-      "User-Agent": "OASIS/1.0",
+      "User-Agent":
+        "OASIS/1.0 (https://github.com/docontra001/oasis)",
+      Accept: "application/json",
     },
-    cache: "force-cache",
+    cache: "no-store",
   });
 
   if (!resposta.ok) {
+    console.log(
+      `${nomePesquisa}: ${resposta.status}`
+    );
     return null;
   }
 
   const dados = await resposta.json();
 
-  const imagem =
-    dados.originalimage?.source ??
-    dados.thumbnail?.source ??
-    null;
-
   return {
     titulo: dados.title,
     descricao: dados.description,
-    imagem,
+    imagem:
+      dados.originalimage?.source ??
+      dados.thumbnail?.source ??
+      null,
   };
 }
