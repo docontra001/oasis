@@ -21,3 +21,23 @@ model Animal {
   destaque       Boolean @default(false)
   imagem         String?
 }
+
+model Fossil {
+  id             String  @id
+  slug           String  @unique
+  grupo          String
+  nome           String?
+  nomeCientifico String
+  periodo        String?
+  idade          String?
+  dieta          String?
+  comprimento    String?
+  altura         String?
+  peso           String?
+  continente     String?
+  pais           String?
+  descricao      String?
+  curiosidade    String?
+  imagem         String?
+  destaque       Boolean @default(false)
+}
