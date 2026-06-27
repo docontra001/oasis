@@ -22,20 +22,28 @@ export default function FaunaClient() {
   }, [pesquisa]);
 
   return (
-    <>
-      <SearchBar
-        value={pesquisa}
-        onChange={setPesquisa}
-      />
+  <>
+    <SearchBar
+      value={pesquisa}
+      onChange={setPesquisa}
+    />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 mt-8">
-        {animais.map((animal) => (
-          <AnimalCard
-            key={animal.id}
-            animal={animal}
-          />
-        ))}
-      </div>
-    </>
-  );
+    <h1 className="text-white text-2xl">
+      {animais.length} animais
+    </h1>
+
+    <pre className="text-white text-xs overflow-auto">
+      {JSON.stringify(animais[0], null, 2)}
+    </pre>
+
+    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 mt-8">
+      {animais.map((animal) => (
+        <AnimalCard
+          key={animal.id}
+          animal={animal}
+        />
+      ))}
+    </div>
+  </>
+);
 }
