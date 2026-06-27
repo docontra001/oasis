@@ -1,16 +1,19 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const areas = [
   {
     emoji: "🧬",
     titulo: "Biologia",
-    descricao: "Notícias científicas e, em breve, o catálogo da fauna brasileira.",
+    descricao:
+      "Notícias científicas e, em breve, o catálogo da fauna brasileira.",
     href: "/biologia",
   },
   {
     emoji: "🚀",
     titulo: "Astronomia",
-    descricao: "Missões espaciais, descobertas e exploração do universo.",
+    descricao:
+      "Missões espaciais, descobertas e exploração do universo.",
     href: "/astronomia",
   },
   {
@@ -43,87 +46,62 @@ export default function HomeContent() {
   return (
     <main className="p-10 text-white">
 
-      <h1 className="text-5xl font-bold mb-3">
-        🌍 OASIS
-      </h1>
+      <div className="flex items-center gap-6 mb-12">
 
-      <p className="text-zinc-400 text-lg mb-10">
-        Ciência, Natureza, Mistérios e Exploração.
-      </p>
+        <Image
+          src="/logo3.png"
+          alt="OASIS"
+          width={120}
+          height={120}
+          priority
+        />
 
-      <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+        <div>
+
+          <h1 className="text-6xl font-black tracking-tight">
+            OASIS
+          </h1>
+
+          <p className="mt-2 text-xl text-zinc-400">
+            Explore o conhecimento.
+          </p>
+
+        </div>
+
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
 
         {areas.map((area) => (
-
           <Link
             key={area.href}
             href={area.href}
-            className="rounded-xl border border-zinc-800 bg-zinc-900 p-6 hover:border-cyan-500 hover:scale-[1.02] transition"
+            className="
+              rounded-2xl
+              border
+              border-zinc-800
+              bg-zinc-900
+              p-6
+              transition
+              hover:border-cyan-500
+              hover:-translate-y-1
+            "
           >
 
-            <h2 className="text-2xl font-bold mb-3">
-              {area.emoji} {area.titulo}
+            <div className="text-4xl mb-4">
+              {area.emoji}
+            </div>
+
+            <h2 className="text-2xl font-bold">
+              {area.titulo}
             </h2>
 
-            <p className="text-zinc-400">
+            <p className="mt-3 text-zinc-400 leading-relaxed">
               {area.descricao}
             </p>
 
           </Link>
-
         ))}
-
-      </div>
-
-      <div className="mt-12 rounded-xl border border-zinc-800 bg-zinc-900 p-8">
-
-        <h2 className="text-3xl font-bold mb-6">
-          📊 OASIS em números
-        </h2>
-
-        <div className="grid md:grid-cols-4 gap-6 text-center">
-
-          <div>
-            <p className="text-4xl font-bold text-cyan-400">
-              129.515
-            </p>
-
-            <p className="text-zinc-400">
-              Espécies catalogadas
-            </p>
-          </div>
-
-          <div>
-            <p className="text-4xl font-bold text-cyan-400">
-              2
-            </p>
-
-            <p className="text-zinc-400">
-              Casos catalogados
-            </p>
-          </div>
-
-          <div>
-            <p className="text-4xl font-bold text-cyan-400">
-              4
-            </p>
-
-            <p className="text-zinc-400">
-              Fontes de notícias
-            </p>
-          </div>
-
-          <div>
-            <p className="text-4xl font-bold text-cyan-400">
-              6
-            </p>
-
-            <p className="text-zinc-400">
-              Áreas do conhecimento
-            </p>
-          </div>
-
-        </div>
 
       </div>
 
