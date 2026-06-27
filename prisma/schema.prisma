@@ -3,14 +3,13 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = "file:./oasis.db"
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model Animal {
   id             String @id
-  slug           String @unique
-
+  slug           String
   nome           String?
   nomeCientifico String
 
