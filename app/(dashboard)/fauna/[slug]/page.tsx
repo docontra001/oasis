@@ -44,48 +44,50 @@ export default async function PaginaAnimal({
       </a>
 
       {imagem?.imagem && (
-  <div className="w-full rounded-2xl overflow-hidden bg-zinc-900 mt-8 mb-8 border border-zinc-800">
+        <div className="w-full rounded-2xl overflow-hidden bg-zinc-900 mt-8 mb-8 border border-zinc-800">
 
-    <Image
-      src={imagem.imagem}
-      alt={animal.nomeCientifico}
-      width={1600}
-      height={900}
-      unoptimized
-      className="w-full h-auto"
-    />
+          <Image
+            src={imagem.imagem}
+            alt={animal.nomeCientifico}
+            width={1600}
+            height={900}
+            unoptimized
+            className="w-full h-auto"
+          />
 
-  </div>
-)}
+        </div>
+      )}
 
-      <h1 className="text-5xl font-bold">
+      <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mt-6">
         {animal.nome || "Sem nome popular"}
       </h1>
 
-      <p className="text-2xl italic text-cyan-400 mt-2">
+      <p className="text-lg sm:text-2xl italic text-cyan-400 mt-2">
         {animal.nomeCientifico}
       </p>
 
       {imagem?.descricao && (
-        <p className="text-zinc-400 mt-2">
+        <p className="text-sm sm:text-base text-zinc-400 mt-2">
           {imagem.descricao}
         </p>
       )}
 
-      <div className="grid md:grid-cols-2 gap-6 mt-10">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-10">
 
         <div className="rounded-xl bg-zinc-900 border border-zinc-800 p-6">
 
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-3">
+          <h2 className="text-2xl font-bold mb-4">
             🧬 Classificação
           </h2>
 
-          <p><b>Reino:</b> {animal.reino}</p>
-          <p><b>Filo:</b> {animal.filo}</p>
-          <p><b>Classe:</b> {animal.classe}</p>
-          <p><b>Ordem:</b> {animal.ordem}</p>
-          <p><b>Família:</b> {animal.familia}</p>
-          <p><b>Gênero:</b> {animal.genero}</p>
+          <div className="space-y-2 text-sm sm:text-base">
+            <p><b>Reino:</b> {animal.reino}</p>
+            <p><b>Filo:</b> {animal.filo}</p>
+            <p><b>Classe:</b> {animal.classe}</p>
+            <p><b>Ordem:</b> {animal.ordem}</p>
+            <p><b>Família:</b> {animal.familia}</p>
+            <p><b>Gênero:</b> {animal.genero}</p>
+          </div>
 
         </div>
 
@@ -99,11 +101,11 @@ export default async function PaginaAnimal({
             Esta espécie faz parte do Catálogo Taxonômico da Fauna do Brasil.
           </p>
 
-          <p className="text-sm sm:text-base text-zinc-400 mb-8">
+          <p className="text-sm sm:text-base text-zinc-400 mt-4">
             Em breve esta página exibirá:
           </p>
 
-          <ul className="list-disc pl-5 mt-3 space-y-2 text-zinc-300">
+          <ul className="list-disc pl-5 mt-3 space-y-2 text-zinc-300 text-sm sm:text-base">
             <li>🗺️ Distribuição</li>
             <li>🌿 Habitat</li>
             <li>🍖 Alimentação</li>
