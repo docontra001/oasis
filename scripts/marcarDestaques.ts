@@ -14,31 +14,38 @@ async function main() {
   let total = 0;
 
   for (const cientifico of destaques) {
-    const wiki = await buscarImagemWikipedia(cientifico);
+  const wiki = await buscarImagemWikipedia(cientifico);
 
-    if (!wiki?.imagem) {
-      console.log(`${cientifico} -> sem imagem`);
-      continue;
-    }
+  const data: {
+    destaque: boolean;
+    imagem?: string;
+  } = {
+    destaque: true,
+  };
 
-    const r = await prisma.animal.updateMany({
-      where: {
-        nomeCientifico: {
-          startsWith: cientifico,
-        },
-      },
-      data: {
-        destaque: true,
-        imagem: wiki.imagem,
-      },
-    });
-
-    console.log(`${cientifico} -> ${r.count}`);
-
-    total += r.count;
+  if (wiki?.imagem) {
+    data.imagem = wiki.imagem;
   }
 
-  console.log(`\n${total} espécies marcadas com imagem.`);
+  const r = await prisma.animal.updateMany({
+    where: {
+      nomeCientifico: {
+        startsWith: cientifico,
+      },
+    },
+    data,
+  });
+
+  console.log(
+    `${cientifico} -> ${r.count}${
+      wiki?.imagem ? " (com imagem)" : " (sem imagem)"
+    }`
+  );
+
+  total += r.count;
+}
+
+console.log(`\n${total} espécies marcadas com imagem.`);
 }
 
 main()
