@@ -34,7 +34,7 @@ export default async function PaginaAnimal({
   );
 
   return (
-    <main className="min-h-screen bg-zinc-950 text-white p-10">
+    <main className="min-h-screen bg-zinc-950 text-white p-4 sm:p-6 lg:p-10">
 
       <a
         href="/fauna"
@@ -76,7 +76,7 @@ export default async function PaginaAnimal({
 
         <div className="rounded-xl bg-zinc-900 border border-zinc-800 p-6">
 
-          <h2 className="text-2xl font-bold mb-4">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-3">
             🧬 Classificação
           </h2>
 
@@ -99,7 +99,7 @@ export default async function PaginaAnimal({
             Esta espécie faz parte do Catálogo Taxonômico da Fauna do Brasil.
           </p>
 
-          <p className="mt-4 text-zinc-400">
+          <p className="text-sm sm:text-base text-zinc-400 mb-8">
             Em breve esta página exibirá:
           </p>
 
