@@ -17,17 +17,22 @@ export async function importarNoticias() {
   for (const noticia of noticias) {
     let imagem = noticia.imagem || null;
 
-    // Se o RSS não trouxe imagem, tenta extrair da página
-    if (!imagem && noticia.fonte === "ScienceDaily") {
+    // Se o feed não trouxe imagem, tenta extrair da página
+    if (!imagem) {
       try {
         const artigo = await extract(noticia.link);
-        imagem = artigo?.image ?? null;
+
+        imagem =
+          artigo?.image ||
+          (artigo as any)?.meta?.["og:image"] ||
+          (artigo as any)?.meta?.["twitter:image"] ||
+          null;
       } catch {
-        console.log("Erro ao extrair imagem:", noticia.link);
+        console.log("Sem imagem:", noticia.link);
       }
     }
 
-    // Baixa a imagem e envia para o Blob
+    // Se encontrou uma imagem, baixa e envia para o Blob
     if (imagem?.startsWith("http")) {
       try {
         const resposta = await axios.get(imagem, {
@@ -58,15 +63,20 @@ export async function importarNoticias() {
           .toBuffer();
 
         const blob = await put(`news/${nomeArquivo}`, buffer, {
-  access: "public",
-  allowOverwrite: true,
-});
+          access: "public",
+          allowOverwrite: true,
+        });
 
         imagem = blob.url;
       } catch (error) {
-  console.error("Erro ao baixar imagem:", noticia.titulo);
-  console.error(error);
-}
+        console.error("Erro ao baixar imagem:", noticia.titulo);
+        console.error(error);
+      }
+    }
+
+    // Placeholder caso nenhuma imagem seja encontrada
+    if (!imagem) {
+      imagem = "/images/news-placeholder.webp";
     }
 
     await prisma.news.upsert({
