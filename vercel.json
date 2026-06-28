@@ -1,8 +1,0 @@
-{
-  "crons": [
-    {
-      "path": "/api/cron/importar-noticias",
-      "schedule": "0 * * * *"
-    }
-  ]
-}
