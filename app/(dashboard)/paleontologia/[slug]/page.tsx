@@ -52,31 +52,51 @@ export default async function PaginaFossil({
         {fossil.nomeCientifico}
       </p>
 
-      <div className="grid lg:grid-cols-2 gap-6 mt-10">
+      <div className="grid xl:grid-cols-3 gap-6 mt-10">
 
-        <div className="rounded-xl bg-zinc-900 border border-zinc-800 p-6">
+        <div className="rounded-2xl bg-zinc-900/80 backdrop-blur border border-cyan-900/40 p-6 shadow-xl">
 
           <h2 className="text-2xl font-bold mb-4">
             🦖 Informações
           </h2>
 
-          <div className="space-y-2">
+          <div className="grid grid-cols-2 gap-4">
 
-            <p><b>Grupo:</b> {fossil.grupo}</p>
-            <p><b>Período:</b> {fossil.periodo}</p>
-            <p><b>Idade:</b> {fossil.idade}</p>
-            <p><b>Dieta:</b> {fossil.dieta}</p>
-            <p><b>Comprimento:</b> {fossil.comprimento}</p>
-            <p><b>Altura:</b> {fossil.altura}</p>
-            <p><b>Peso:</b> {fossil.peso}</p>
-            <p><b>Continente:</b> {fossil.continente}</p>
-            <p><b>País:</b> {fossil.pais}</p>
+  <div className="bg-zinc-800 rounded-xl p-4">
+    <div className="text-zinc-400 text-sm">Grupo</div>
+    <div className="font-bold">{fossil.grupo ?? "-"}</div>
+  </div>
 
-          </div>
+  <div className="bg-zinc-800 rounded-xl p-4">
+    <div className="text-zinc-400 text-sm">Período</div>
+    <div className="font-bold">{fossil.periodo ?? "-"}</div>
+  </div>
+
+  <div className="bg-zinc-800 rounded-xl p-4">
+    <div className="text-zinc-400 text-sm">Dieta</div>
+    <div className="font-bold">{fossil.dieta ?? "-"}</div>
+  </div>
+
+  <div className="bg-zinc-800 rounded-xl p-4">
+    <div className="text-zinc-400 text-sm">Comprimento</div>
+    <div className="font-bold">{fossil.comprimento ?? "-"}</div>
+  </div>
+
+  <div className="bg-zinc-800 rounded-xl p-4">
+    <div className="text-zinc-400 text-sm">Peso</div>
+    <div className="font-bold">{fossil.peso ?? "-"}</div>
+  </div>
+
+  <div className="bg-zinc-800 rounded-xl p-4">
+    <div className="text-zinc-400 text-sm">Continente</div>
+    <div className="font-bold">{fossil.continente ?? "-"}</div>
+  </div>
+
+</div>
 
         </div>
 
-        <div className="rounded-xl bg-zinc-900 border border-zinc-800 p-6">
+        <div className="rounded-2xl bg-zinc-900/80 backdrop-blur border border-cyan-900/40 p-6 shadow-xl">
 
           <h2 className="text-2xl font-bold mb-4">
             📖 Descrição

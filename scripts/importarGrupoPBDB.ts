@@ -5,14 +5,7 @@ import slugify from "slugify";
 const prisma = new PrismaClient();
 
 const grupos = [
-  "Theropoda",
-  "Sauropoda",
-  "Ceratopsia",
-  "Stegosauria",
-  "Ankylosauria",
-  "Hadrosauridae",
-  "Dromaeosauridae",
-  "Titanosauria"
+  "Dinosauria^Aves"
 ];
 
 async function importarGrupo(grupo: string) {
@@ -22,20 +15,22 @@ async function importarGrupo(grupo: string) {
     "https://paleobiodb.org/data1.2/taxa/list.json",
     {
       params: {
-        base_name: grupo,
+        base_name: `${grupo}^Aves`,
         limit: "all",
       },
     }
   );
 
-  const registros = (data.records ?? []).filter((r: any) => {
+ const registros = (data.records ?? []).filter((r: any) => {
   return (
-    r.rnk === "genus" ||
-    r.rnk === "species"
+    (r.rnk === "genus" || r.rnk === "species") &&
+    r.nam &&
+    !r.nam.includes("cf.") &&
+    !r.nam.includes("aff.") &&
+    !r.nam.includes("?")
   );
 });
 
-console.log(registros.slice(0, 20));
 
   const fosseis = registros
     .filter((r: any) => r.nam)
