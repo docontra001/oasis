@@ -11,10 +11,29 @@ export async function importarNoticias() {
   console.log("Importando notícias...");
 
   const noticias = await buscarNoticiasBiologia();
+  const noticiasFiltradas = noticias.filter((noticia, index) => {
+  const titulo = noticia.titulo
+    .toLowerCase()
+    .replace(/[^\w\s]/g, "")
+    .trim();
+
+  return (
+    index ===
+    noticias.findIndex((n) =>
+      n.titulo
+        .toLowerCase()
+        .replace(/[^\w\s]/g, "")
+        .trim() === titulo
+    )
+  );
+});
 
   let total = 0;
 
-  for (const noticia of noticias) {
+  for (const noticia of noticiasFiltradas) {
+    console.log(
+  `${noticias.length - noticiasFiltradas.length} notícias duplicadas removidas.`
+);
     let imagem = noticia.imagem || null;
 
     // Se o feed não trouxe imagem, tenta extrair da página

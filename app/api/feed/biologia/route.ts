@@ -10,6 +10,7 @@ const prioridade: Record<string, number> = {
 export async function GET() {
   const noticias = await prisma.news.findMany();
 
+  // Ordena por prioridade e data
   noticias.sort((a, b) => {
     const pa = prioridade[a.fonte] ?? 0;
     const pb = prioridade[b.fonte] ?? 0;
@@ -24,8 +25,28 @@ export async function GET() {
     );
   });
 
+  // Mistura as fontes
+  const resultado = [];
+  const ultimaFonte = new Set<number>();
+
+  while (noticias.length) {
+    let indice = noticias.findIndex(
+      (n) => !ultimaFonte.has(n.fonte as any)
+    );
+
+    if (indice === -1) {
+      ultimaFonte.clear();
+      indice = 0;
+    }
+
+    const noticia = noticias.splice(indice, 1)[0];
+
+    resultado.push(noticia);
+    ultimaFonte.add(noticia.fonte as any);
+  }
+
   return Response.json(
-    noticias.slice(0, 50).map((n) => ({
+    resultado.slice(0, 50).map((n) => ({
       titulo: n.tituloPt ?? n.titulo,
       descricao: n.descricaoPt ?? n.descricao,
       link: n.link,
