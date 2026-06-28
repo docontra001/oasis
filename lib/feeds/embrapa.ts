@@ -13,7 +13,15 @@ export async function buscarNoticiasEmbrapa() {
 
   const $ = cheerio.load(data);
 
-  const noticias = [];
+  const noticias: {
+  titulo: string;
+  descricao: string;
+  link: string;
+  imagem: string;
+  data: string;
+  fonte: string;
+  categoria: string;
+}[] = [];
 
   $(".portlet-search-result").each((_, el) => {
     const titulo = $(el).find("h2 a").text().trim();
