@@ -125,4 +125,5 @@ export async function importarNoticias() {
   }
 
   console.log(`✅ ${total} notícias importadas.`);
+return total;
 }
