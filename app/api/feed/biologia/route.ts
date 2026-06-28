@@ -8,7 +8,11 @@ const prioridade: Record<string, number> = {
 };
 
 export async function GET() {
-  const noticias = await prisma.news.findMany();
+  const noticias = await prisma.news.findMany({
+  where: {
+    categoria: "Biologia",
+  },
+});
 
   // Ordena por prioridade e data
   noticias.sort((a, b) => {

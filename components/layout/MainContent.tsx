@@ -35,8 +35,17 @@ export default function MainContent({
     carregarNoticias();
   }, [endpoint]);
 
-  const destaque = noticias[0];
-  const restantes = noticias.slice(1);
+  const destaque =
+  noticias.find(
+    (n) =>
+      n.imagem &&
+      !n.imagem.includes("news-placeholder") &&
+      n.imagem.trim() !== ""
+  ) ?? noticias[0];
+
+const restantes = noticias.filter(
+  (n) => n.link !== destaque?.link
+);
 
   return (
     <main className="flex-1 bg-zinc-950 overflow-y-auto">

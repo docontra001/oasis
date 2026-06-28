@@ -14,14 +14,14 @@ export async function buscarNoticiasEmbrapa() {
   const $ = cheerio.load(data);
 
   const noticias: {
-  titulo: string;
-  descricao: string;
-  link: string;
-  imagem: string;
-  data: string;
-  fonte: string;
-  categoria: string;
-}[] = [];
+    titulo: string;
+    descricao: string;
+    link: string;
+    imagem: string;
+    data: string;
+    fonte: string;
+    categoria: string;
+  }[] = [];
 
   $(".portlet-search-result").each((_, el) => {
     const titulo = $(el).find("h2 a").text().trim();
@@ -37,11 +37,7 @@ export async function buscarNoticiasEmbrapa() {
       .text()
       .trim();
 
-    const imagem =
-      $(el).find("img").attr("src") ?? "";
-
-    const data =
-      $(el).find(".asset-metadata").text().trim();
+    const imagem = $(el).find("img").attr("src") ?? "";
 
     noticias.push({
       titulo,

@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { buscarNoticiasBiologia } from "@/lib/feeds/biologia";
+import { buscarNoticiasBiologia } from "@/lib/feeds";
 import { extract } from "@extractus/article-extractor";
 import axios from "axios";
 import sharp from "sharp";
@@ -11,32 +11,34 @@ export async function importarNoticias() {
   console.log("Importando notícias...");
 
   const noticias = await buscarNoticiasBiologia();
-  const noticiasFiltradas = noticias.filter((noticia, index) => {
-  const titulo = noticia.titulo
-    .toLowerCase()
-    .replace(/[^\w\s]/g, "")
-    .trim();
 
-  return (
-    index ===
-    noticias.findIndex((n) =>
-      n.titulo
-        .toLowerCase()
-        .replace(/[^\w\s]/g, "")
-        .trim() === titulo
-    )
+  const noticiasFiltradas = noticias.filter((noticia, index) => {
+    const titulo = noticia.titulo
+      .toLowerCase()
+      .replace(/[^\w\s]/g, "")
+      .trim();
+
+    return (
+      index ===
+      noticias.findIndex(
+        (n) =>
+          n.titulo
+            .toLowerCase()
+            .replace(/[^\w\s]/g, "")
+            .trim() === titulo
+      )
+    );
+  });
+
+  console.log(
+    `${noticias.length - noticiasFiltradas.length} notícias duplicadas removidas.`
   );
-});
 
   let total = 0;
 
   for (const noticia of noticiasFiltradas) {
-    console.log(
-  `${noticias.length - noticiasFiltradas.length} notícias duplicadas removidas.`
-);
     let imagem = noticia.imagem || null;
 
-    // Se o feed não trouxe imagem, tenta extrair da página
     if (!imagem) {
       try {
         const artigo = await extract(noticia.link);
@@ -51,7 +53,6 @@ export async function importarNoticias() {
       }
     }
 
-    // Se encontrou uma imagem, baixa e envia para o Blob
     if (imagem?.startsWith("http")) {
       try {
         const resposta = await axios.get(imagem, {
@@ -93,7 +94,6 @@ export async function importarNoticias() {
       }
     }
 
-    // Placeholder caso nenhuma imagem seja encontrada
     if (!imagem) {
       imagem = "/images/news-placeholder.webp";
     }
@@ -125,5 +125,6 @@ export async function importarNoticias() {
   }
 
   console.log(`✅ ${total} notícias importadas.`);
-return total;
+
+  return total;
 }
