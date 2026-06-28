@@ -61,15 +61,19 @@ export default function FossilCard({ fossil }: Props) {
 
         <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
 
-        <div className="absolute top-3 left-3 rounded-full bg-cyan-600/90 px-3 py-1 text-xs font-bold">
-          {fossil.grupo}
-        </div>
+        <div
+  className={`absolute top-3 left-3 rounded-full px-3 py-1 text-xs font-bold text-white ${
+    fossil.dieta === "Carnivore"
+      ? "bg-red-600/90"
+      : fossil.dieta === "Herbivore"
+      ? "bg-green-600/90"
+      : "bg-amber-600/90"
+  }`}
+>
+  {fossil.dieta ?? "Desconhecida"}
+</div>
 
-        {fossil.dieta && (
-          <div className="absolute top-3 right-3 rounded-full bg-red-600/90 px-3 py-1 text-xs font-bold">
-            {fossil.dieta}
-          </div>
-        )}
+        
       </div>
 
       <div className="p-5">

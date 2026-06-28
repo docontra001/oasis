@@ -24,33 +24,27 @@ export async function GET(request: NextRequest) {
           ],
         }
       : {
-          AND: [
-            {
-              destaque: true,
-            },
-            {
-              imagem: {
-                not: null,
-              },
-            },
-          ],
-        },
+  imagem: {
+    not: null,
+  },
+},
 
     select: {
-      id: true,
-      slug: true,
-      nome: true,
-      nomeCientifico: true,
-      grupo: true,
-      periodo: true,
-      imagem: true,
-    },
+  id: true,
+  slug: true,
+  nome: true,
+  nomeCientifico: true,
+  grupo: true,
+  periodo: true,
+  dieta: true,
+  imagem: true,
+},
 
-    take: 30,
+    take: 12,
 
     orderBy: {
-      nome: "asc",
-    },
+  nomeCientifico: "asc",
+},
   });
 
   return NextResponse.json(fosseis);
