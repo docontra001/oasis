@@ -1,5 +1,6 @@
 import Parser from "rss-parser";
-
+import { buscarNoticiasFapesp } from "./fapesp";
+import { buscarNoticiasEmbrapa } from "./embrapa";
 const parser = new Parser();
 
 const feeds = [
@@ -24,12 +25,28 @@ const feeds = [
 export async function buscarNoticiasBiologia() {
   const noticias = [];
 
+  // Primeiro busca as notícias da FAPESP
+  try {
+  const embrapa = await buscarNoticiasEmbrapa();
+  noticias.push(...embrapa);
+} catch (e) {
+  console.error("Embrapa");
+  console.error(e);
+}
+  try {
+    const fapesp = await buscarNoticiasFapesp();
+    noticias.push(...fapesp);
+  } catch (e) {
+    console.error("FAPESP");
+    console.error(e);
+  }
+
+  // Depois busca os RSS internacionais
   for (const feedInfo of feeds) {
     try {
       const feed = await parser.parseURL(feedInfo.url);
 
       for (const item of feed.items) {
-        
         noticias.push({
           titulo: item.title ?? "",
           descricao:
@@ -49,9 +66,9 @@ export async function buscarNoticiasBiologia() {
         });
       }
     } catch (e) {
-  console.error(feedInfo.nome);
-  console.error(e);
-}
+      console.error(feedInfo.nome);
+      console.error(e);
+    }
   }
 
   return noticias;
