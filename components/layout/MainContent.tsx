@@ -1,4 +1,5 @@
 "use client";
+
 import BannerOasis from "../BannerOasis";
 import { useEffect, useState } from "react";
 import NewsCard from "../ui/NewsCard";
@@ -34,30 +35,68 @@ export default function MainContent({
     carregarNoticias();
   }, [endpoint]);
 
+  const destaque = noticias[0];
+  const restantes = noticias.slice(1);
+
   return (
     <main className="flex-1 bg-zinc-950 p-8 overflow-y-auto">
 
-  <BannerOasis />
+      <BannerOasis />
 
-  <h1 className="text-4xl font-bold">{titulo}</h1>
+      <h1 className="text-5xl font-black mt-8">
+        {titulo}
+      </h1>
 
-      <p className="text-zinc-500 mt-2 mb-8">
-        Últimas atualizações.
+      <p className="text-zinc-400 mt-3 mb-8">
+        {noticias.length} notícias disponíveis.
       </p>
 
-      <div className="grid grid-cols-2 gap-5">
-        {noticias.map((noticia) => (
+      {destaque && (
+        <div className="mb-10">
+          <NewsCard
+  {...destaque}
+  destaque
+/>
+        </div>
+      )}
+
+      <div className="flex items-center justify-between mb-6">
+
+        <h2 className="text-3xl font-bold">
+          Últimas notícias
+        </h2>
+
+        <div className="flex gap-2 flex-wrap">
+
+          <span className="rounded-full bg-cyan-700 px-3 py-1 text-sm">
+            🧬 Genética
+          </span>
+
+          <span className="rounded-full bg-green-700 px-3 py-1 text-sm">
+            🌿 Ecologia
+          </span>
+
+          <span className="rounded-full bg-red-700 px-3 py-1 text-sm">
+            🦠 Saúde
+          </span>
+
+          <span className="rounded-full bg-amber-700 px-3 py-1 text-sm">
+            🐘 Zoologia
+          </span>
+
+        </div>
+
+      </div>
+
+      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        {restantes.map((noticia) => (
           <NewsCard
             key={noticia.link}
-            titulo={noticia.titulo}
-            descricao={noticia.descricao}
-            link={noticia.link}
-            data={noticia.data}
-            imagem={noticia.imagem}
-            fonte={noticia.fonte}
+            {...noticia}
           />
         ))}
       </div>
+
     </main>
   );
 }

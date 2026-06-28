@@ -1,22 +1,21 @@
-import { buscarFeedBiologia } from "@/lib/feeds";
+import { prisma } from "@/lib/prisma";
 
 export async function GET() {
+  const noticias = await prisma.news.findMany({
+    orderBy: {
+      publicadaEm: "desc",
+    },
+    take: 50,
+  });
 
-  try {
-
-    const noticias = await buscarFeedBiologia();
-
-    return Response.json(noticias);
-
-  } catch (erro) {
-
-    console.error(erro);
-
-    return Response.json(
-      { erro: "Erro ao carregar notícias." },
-      { status: 500 }
-    );
-
-  }
-
+  return Response.json(
+    noticias.map((n) => ({
+      titulo: n.tituloPt ?? n.titulo,
+      descricao: n.descricaoPt ?? n.descricao,
+      link: n.link,
+      data: n.publicadaEm,
+      imagem: n.imagem ?? "",
+      fonte: n.fonte,
+    }))
+  );
 }

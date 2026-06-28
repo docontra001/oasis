@@ -1,4 +1,4 @@
-import { buscarNoticiasBiologia } from "./phys";
+import { buscarNoticiasBiologia } from "./biologia";
 
 export async function buscarFeedBiologia() {
 

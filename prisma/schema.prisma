@@ -41,3 +41,25 @@ model Fossil {
   imagem         String?
   destaque       Boolean @default(false)
 }
+model News {
+  id           String   @id @default(cuid())
+
+  titulo       String
+  tituloPt     String?
+
+  descricao    String?
+  descricaoPt  String?
+
+  imagem       String?
+
+  link         String   @unique
+
+  fonte        String
+  categoria    String
+
+  publicadaEm  DateTime
+
+  destaque     Boolean @default(false)
+
+  createdAt    DateTime @default(now())
+}
