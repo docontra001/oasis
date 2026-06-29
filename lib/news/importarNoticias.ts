@@ -1,16 +1,17 @@
 import { PrismaClient } from "@prisma/client";
-import { buscarNoticiasBiologia } from "@/lib/feeds";
+import { buscarTodasNoticias } from "@/lib/feeds";
 import { extract } from "@extractus/article-extractor";
 import axios from "axios";
 import sharp from "sharp";
 import { put } from "@vercel/blob";
+import * as cheerio from "cheerio";
 
 const prisma = new PrismaClient();
 
 export async function importarNoticias() {
   console.log("Importando notícias...");
 
-  const noticias = await buscarNoticiasBiologia();
+  const noticias = await buscarTodasNoticias();
 
   const noticiasFiltradas = noticias.filter((noticia, index) => {
     const titulo = noticia.titulo
@@ -40,18 +41,39 @@ export async function importarNoticias() {
     let imagem = noticia.imagem || null;
 
     if (!imagem) {
-      try {
-        const artigo = await extract(noticia.link);
+  try {
+    const artigo = await extract(noticia.link);
 
-        imagem =
-          artigo?.image ||
-          (artigo as any)?.meta?.["og:image"] ||
-          (artigo as any)?.meta?.["twitter:image"] ||
-          null;
-      } catch {
-        console.log("Sem imagem:", noticia.link);
+    imagem =
+      artigo?.image ||
+      (artigo as any)?.meta?.["og:image"] ||
+      (artigo as any)?.meta?.["twitter:image"] ||
+      null;
+
+    if (!imagem) {
+      const { data } = await axios.get(noticia.link, {
+        headers: {
+          "User-Agent": "Mozilla/5.0 OASIS",
+        },
+      });
+
+      const $ = cheerio.load(data);
+
+      imagem =
+        $('meta[property="og:image"]').attr("content") ||
+        $('meta[name="twitter:image"]').attr("content") ||
+        $("img").first().attr("src") ||
+        null;
+
+      if (imagem?.startsWith("/")) {
+        const url = new URL(noticia.link);
+        imagem = url.origin + imagem;
       }
     }
+  } catch {
+    console.log("Sem imagem:", noticia.link);
+  }
+}
 
     if (imagem?.startsWith("http")) {
       try {
